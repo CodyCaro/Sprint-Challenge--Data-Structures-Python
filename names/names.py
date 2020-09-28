@@ -19,8 +19,63 @@ for name_1 in names_1:
             duplicates.append(name_1)
 
 end_time = time.time()
-print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
-print (f"runtime: {end_time - start_time} seconds")
+print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
+print(f"runtime: {end_time - start_time} seconds")
+
+
+class Node:
+    def __init__(self, val):
+        self.value = val
+        self.leftChild = None
+        self.rightChild = None
+
+    def insert(self, data):
+        if self.value == data:
+            return False
+        elif self.value > data:
+            if self.leftChild:
+                return self.leftChild.insert(data)
+            else:
+                self.leftChild = Node(data)
+                return True
+        else:
+            if self.rightChild:
+                return self.rightChild.insert(data)
+            else:
+                self.rightChild = Node(data)
+                return True
+
+    def find(self, data):
+        if(self.value == data):
+            return True
+        elif self.value > data:
+            if self.leftChild:
+                return self.leftChild.find(data)
+            else:
+                return False
+        else:
+            if self.rightChild:
+                return self.rightChild.find(data)
+            else:
+                return False
+
+
+class Tree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        if self.root:
+            return self.root.insert(data)
+        else:
+            self.root = Node(data)
+            return True
+
+    def find(self, data):
+        if self.root:
+            return self.root.find(data)
+        else:
+            return False
 
 # ---------- Stretch Goal -----------
 # Python has built-in tools that allow for a very efficient approach to this problem
